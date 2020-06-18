@@ -1,0 +1,25 @@
+{
+  "name": "@nicejob-db-test/nicejob-db",
+  "version": "1.0.0",
+  "description": "Nice Job DB Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuandriy/nicejob-db.git"
+  },
+  "author": "Andriy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kuandriy/nicejob-db/issues"
+  },
+  "homepage": "https://github.com/kuandriy/nicejob-db#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "moment": "^2.26.0",
+    "mongodb": "^3.5.9",
+    "object-sizeof": "^1.6.0"
+  }
+}
