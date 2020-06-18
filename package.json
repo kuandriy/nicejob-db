@@ -18,6 +18,7 @@
   "homepage": "https://github.com/kuandriy/nicejob-db#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "crypto-js": "^4.0.0",
     "moment": "^2.26.0",
     "mongodb": "^3.5.9",
     "object-sizeof": "^1.6.0"
