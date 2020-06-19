@@ -39,25 +39,38 @@ class Service {
         return { status: "OK" };
     }
 
-    async find(query, collection) {
+    async find(options) {
         return new Promise(async (resolve, reject) => {
-            // First look in cache
-            const key = SHA256(query).toString();
-            const result = cache.get(key);
-            if (result) {
-                return resolve(result);
+            let { query, collection, limit } = options;
+            if (!limit) {
+                limit = 10;
             }
+            // First look in cache
+
+            // do not cache whole DB
+            let key;
+            if (Object.keys(query).length > 0) {
+                key = SHA256(query).toString();
+                const result = cache.get(key);
+                if (result) {
+                    return resolve(result);
+                }
+            }
+
             // query db
-            await this.db.collection(collection).find(query, { projection: { _id: 0 } }).toArray((err, result) => {
+            await this.db.collection(collection).find(query, { projection: { _id: 0 } }).limit(limit).toArray((err, result) => {
                 if (err) {
                     return reject(err);
                 }
-                // save to cache    
-                for (let record of result) {
-                    cache.add({
-                        key: key,
-                        record: record
-                    });
+                // save to cache   
+
+                if (key) {
+                    for (let record of result) {
+                        cache.add({
+                            key: key,
+                            record: record
+                        });
+                    }
                 }
                 resolve(result)
             });
