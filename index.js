@@ -94,7 +94,7 @@ class Service {
                     if (error) {
                         return reject(error);
                     }
-                    resolve(result);
+                    resolve({id: query.id});
                 }
             );
         });
