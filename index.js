@@ -81,19 +81,17 @@ class Service {
             throw ({ error: error });
         }
         return new Promise(async (resolve, reject) => {
-            const query = {};
-            if (id) {
-                query.id = id;
-            }
+            let query = {};
+            const key = Math.random() * Date.now();
+            query.id = id ? id : SHA256(key.toString()).toString();
             await this.db.collection(collection).updateOne(
                 query,
                 {
                     $currentDate: { "created_at": { $type: "date" } },
-                    $set: data,
-                    $setOnInsert: data
+                    $set: data
                 },
                 { upsert: true }, (error, result) => {
-                    if (err) {
+                    if (error) {
                         return reject(error);
                     }
                     resolve(result);
