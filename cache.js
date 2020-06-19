@@ -1,4 +1,3 @@
-
 const sizeof = require('object-sizeof');
 const moment = require('moment');
 class Service {
@@ -22,7 +21,9 @@ class Service {
     }
     get(key) {
         //update key timestamp on new request
-        this.store[key].created = moment().format();
+        if(this.store[key]){
+            this.store[key].created = moment().format();
+        }
         return this.store[key];
     }
     truncateCache() {

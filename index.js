@@ -53,10 +53,12 @@ class Service {
                     return reject(err);
                 }
                 // save to cache    
-                cache.add({
-                    key: key,
-                    record: result
-                });
+                for (let record of result) {
+                    cache.add({
+                        key: key,
+                        record: record
+                    });
+                }
                 resolve(result)
             });
         });
@@ -64,7 +66,7 @@ class Service {
 
     async save(options) {
         // Validate input
-        let {id, data, collection} = options;
+        let { id, data, collection } = options;
         const schema = Joi.object().keys({
             id: Joi.number().allow(null),
             data: Joi.object().required(),
@@ -94,7 +96,7 @@ class Service {
                     if (error) {
                         return reject(error);
                     }
-                    resolve({id: query.id});
+                    resolve({ id: query.id });
                 }
             );
         });
