@@ -81,7 +81,7 @@ class Service {
         // Validate input
         let { id, data, collection } = options;
         const schema = Joi.object().keys({
-            id: Joi.number().allow(null),
+            id: Joi.string().allow(null),
             data: Joi.object().required(),
             collection: Joi.string().required()
         });
